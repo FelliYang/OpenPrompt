@@ -31,7 +31,8 @@ class InputExample(object):
                  text_b = "",
                  label = None,
                  meta: Optional[Dict] = None,
-                 tgt_text: Optional[Union[str,List[str]]] = None
+                 tgt_text: Optional[Union[str,List[str]]] = None,
+                 idx=None
                 ):
 
         self.guid = guid
@@ -40,6 +41,7 @@ class InputExample(object):
         self.label = label
         self.meta = meta if meta else {}
         self.tgt_text = tgt_text
+        self.idx = idx
 
     def __repr__(self):
         return str(self.to_json_string())
@@ -292,6 +294,7 @@ class InputFeatures(dict):
                 try:
                     return_dict[key] = default_collate([d[key] for d in batch])
                 except:
-                    print(f"key{key}\n d {[batch[i][key] for i in range(len(batch))]} ")
+                    # print(f"cannot return key {key}\n d {[batch[i][key] for i in range(len(batch))]} ")
+                    pass
 
         return InputFeatures(**return_dict)

@@ -292,7 +292,7 @@ class RecordProcessor(FewGLUEDataProcessor):
     @staticmethod
     def get_examples(path, split, seed=42, max_train_candidates_per_question: int = 10) -> List[InputExample]:
         examples = []
-        path = os.path.join(data_dir, "{}.jsonl".format(split))
+        path = os.path.join(path, "{}.jsonl".format(split))
 
         entity_shuffler = random.Random(seed)
 

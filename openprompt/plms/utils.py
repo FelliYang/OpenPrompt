@@ -152,16 +152,23 @@ class TokenizerWrapper:
 
     @staticmethod
     def padding(input_dict: Dict,
-                max_len: int, pad_id_for_inputs: int=0, pad_id_for_others: int=0) -> None:
+                max_len: int, pad_id_for_inputs: int=0, pad_id_for_others: int=0, padding_side: str="right") -> None:
         for key, value in input_dict.items():
             if (len(input_dict[key]) > max_len):
                 raise ValueError(f'''Truncated seq length of '{key}' still greater than max length {max_len}."\
                     "One possible reason is that no enough shortenable parts in template. Try adding {{"shortenable": "True"}} property.
                 ''')
-            if 'input' in key:
-                input_dict[key].extend([pad_id_for_inputs]*(max_len-len(value)))
-            else:
-                input_dict[key].extend([pad_id_for_others]*(max_len-len(value)))
+
+            if padding_side=="right":
+                if 'input' in key:
+                    input_dict[key].extend([pad_id_for_inputs]*(max_len-len(value)))
+                else:
+                    input_dict[key].extend([pad_id_for_others]*(max_len-len(value)))
+            else: # left padding
+                if 'input' in key:
+                    input_dict[key] = [pad_id_for_inputs]*(max_len-len(value)) + input_dict[key]
+                else:
+                    input_dict[key] = [pad_id_for_others]*(max_len-len(value)) + input_dict[key]
         return input_dict
 
 

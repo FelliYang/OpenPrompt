@@ -33,7 +33,7 @@ class LMTokenizerWrapper(TokenizerWrapper):
         return self._num_specials
 
 
-    def tokenize_one_example(self, wrapped_example, teacher_forcing):
+    def tokenize_one_example(self, wrapped_example, teacher_forcing, padding_side="right"):
         ''' # TODO doesn't consider the situation that input has two parts
         '''
         wrapped_example, others = wrapped_example
@@ -100,7 +100,8 @@ class LMTokenizerWrapper(TokenizerWrapper):
         encoder_inputs = self.padding(
             input_dict = encoder_inputs,
             max_len = self.max_seq_length,
-            pad_id_for_inputs = self.tokenizer.pad_token_id
+            pad_id_for_inputs = self.tokenizer.pad_token_id,
+            padding_side = padding_side
         )
         encoder_inputs = {**encoder_inputs, "input_ids_len": input_ids_len}
         return encoder_inputs

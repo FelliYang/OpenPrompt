@@ -71,6 +71,11 @@ class PromptDataLoader(object):
         self.shuffle = shuffle
         self.teacher_forcing = teacher_forcing
 
+        if "padding_side" in kwargs.keys():
+            self.padding_side = kwargs["padding_side"]
+        else:
+            self.padding_side = "right"
+
         if tokenizer_wrapper is None:
             if tokenizer_wrapper_class is None:
                 raise RuntimeError("Either wrapped_tokenizer or tokenizer_wrapper_class should be specified.")
@@ -134,7 +139,7 @@ class PromptDataLoader(object):
         """
         for idx, wrapped_example in tqdm(enumerate(self.wrapped_dataset),desc='tokenizing'):
         # for idx, wrapped_example in enumerate(self.wrapped_dataset):
-            inputfeatures = InputFeatures(**self.tokenizer_wrapper.tokenize_one_example(wrapped_example, self.teacher_forcing), **wrapped_example[1]).to_tensor()
+            inputfeatures = InputFeatures(**self.tokenizer_wrapper.tokenize_one_example(wrapped_example, self.teacher_forcing, self.padding_side), **wrapped_example[1]).to_tensor()
             self.tensor_dataset.append(inputfeatures)
 
     def __len__(self):
