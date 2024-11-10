@@ -1,0 +1,4 @@
+ A {"mask"} question : <input>
+ <input> This topic is about {"mask"} .
+ [ Category : {"mask"} ] <input>
+ [ Topic : {"mask"} ] <input>

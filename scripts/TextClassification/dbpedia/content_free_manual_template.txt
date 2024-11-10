@@ -1,0 +1,4 @@
+ <input> <input> is a {"mask"} .
+ <input> In this sentence, <input> is a {"mask"} .
+ <input> The type of <input> is {"mask"} .
+ <input> The category of <input> is {"mask"} .

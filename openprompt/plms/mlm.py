@@ -22,7 +22,7 @@ class MLMTokenizerWrapper(TokenizerWrapper):
             self._num_specials = self.tokenizer.num_special_tokens_to_add()
         return self._num_specials
 
-    def tokenize_one_example(self, wrapped_example, teacher_forcing):
+    def tokenize_one_example(self, wrapped_example, teacher_forcing, padding_side="right"):
         ''' # TODO doesn't consider the situation that input has two parts
         '''
 
@@ -79,7 +79,7 @@ class MLMTokenizerWrapper(TokenizerWrapper):
         if self.create_token_type_ids:
             encoder_inputs['token_type_ids'] = [0] *len(encoder_inputs['input_ids'])
         # padding
-        encoder_inputs = self.padding(input_dict=encoder_inputs, max_len=self.max_seq_length, pad_id_for_inputs=self.tokenizer.pad_token_id)
+        encoder_inputs = self.padding(input_dict=encoder_inputs, max_len=self.max_seq_length, pad_id_for_inputs=self.tokenizer.pad_token_id,padding_side=padding_side)
 
 
         if len(encoded_tgt_text) > 0:

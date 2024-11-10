@@ -1,0 +1,4 @@
+ It was {"mask"} . <input>
+ Just {"mask"} ! <input>
+ <input> All in all , it was {"mask"} .
+ <input> In summary , the film was {"mask"} .

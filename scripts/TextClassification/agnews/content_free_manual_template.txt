@@ -1,0 +1,5 @@
+ A {"mask"} news : <input>
+ <input> This topic is about {"mask"} .
+ [ Category : {"mask"} ] <input>
+ [ Topic : {"mask"} ] <input>
+ <input> {"special": "<sep>"} This topic is about {"mask"} .
